@@ -14,6 +14,7 @@ import {
     This is our application's top-level component.
     
     test
+    test2
     @author McKilla Gorilla
 */
 /*
