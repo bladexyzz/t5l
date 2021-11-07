@@ -8,11 +8,11 @@ import {
     HomeWrapper,
     RegisterScreen,
     Statusbar,
+    LoginScreen,
     WorkspaceScreen
 } from './components'
 /*
     This is our application's top-level component.
-    test3
     @author McKilla Gorilla
 */
 /*
@@ -30,6 +30,7 @@ const App = () => {
                     <Switch>
                         <Route path="/" exact component={HomeWrapper} />
                         <Route path="/register/" exact component={RegisterScreen} />
+                        <Route path="/login/" exact component={LoginScreen} />
                         <Route path="/top5list/:id" exact component={WorkspaceScreen} />
                     </Switch>
                     <Statusbar />
