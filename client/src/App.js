@@ -12,8 +12,7 @@ import {
 } from './components'
 /*
     This is our application's top-level component.
-    
-    test
+    test3
     @author McKilla Gorilla
 */
 /*
