@@ -21,19 +21,19 @@ registerUser = async (req, res) => {
         const { firstName, lastName, email, password, passwordVerify } = req.body;
         if (!firstName || !lastName || !email || !password || !passwordVerify) {
             return res
-                .status(400)
+                .status(201)
                 .json({ errorMessage: "Please enter all required fields." });
         }
         if (password.length < 8) {
             return res
-                .status(400)
+                .status(201)
                 .json({
                     errorMessage: "Please enter a password of at least 8 characters."
                 });
         }
         if (password !== passwordVerify) {
             return res
-                .status(400)
+                .status(201)
                 .json({
                     errorMessage: "Please enter the same password twice."
                 })
@@ -41,7 +41,7 @@ registerUser = async (req, res) => {
         const existingUser = await User.findOne({ email: email });
         if (existingUser) {
             return res
-                .status(400)
+                .status(201)
                 .json({
                     success: false,
                     errorMessage: "An account with this email address already exists."
@@ -92,12 +92,12 @@ loginUser = async(req,res) =>{
         const {email, password} = req.body;
         if (!email || !password) {
             return res
-                .status(400)
+                .status(201)
                 .json({ errorMessage: "Please enter all required fields." });
         }
         if (password.length < 8) {
             return res
-                .status(400)
+                .status(201)
                 .json({
                     errorMessage: "Please enter a password of at least 8 characters."
                 });
@@ -105,7 +105,7 @@ loginUser = async(req,res) =>{
         const existingUser = await User.findOne({ email: email });
         if (!existingUser) {
             return res
-                .status(400)
+                .status(201)
                 .json({
                     success: false,
                     errorMessage: "No account with that email is found."
@@ -115,7 +115,7 @@ loginUser = async(req,res) =>{
 		.compare(password, existingUser.passwordHash);
         if (!passwordCorrect) {
 	    return res
-         .status(401)
+         .status(201)
          .json({
             success: false,
           	errorMessage: "Wrong password."
