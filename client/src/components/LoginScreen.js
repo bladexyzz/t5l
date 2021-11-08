@@ -13,18 +13,24 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
+import { GlobalStoreContext } from '../store';
+import { useContext } from 'react';
+import AuthContext from '../auth'
 
 const theme = createTheme();
 
 export default function LoginScreen() {
+  const { auth } = useContext(AuthContext);
+  const { store } = useContext(GlobalStoreContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+    
+    auth.loginUser({
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }, store);
   };
 
   return (
