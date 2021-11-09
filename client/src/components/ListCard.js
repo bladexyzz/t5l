@@ -6,7 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import DeleteModal from './DeleteModal';
 /*
     This is a card in our list of top 5 lists. It lets select
     a list for editing and it has controls for changing its 
@@ -19,6 +19,7 @@ function ListCard(props) {
     const [editActive, setEditActive] = useState(false);
     const [text, setText] = useState("");
     const { idNamePair } = props;
+    const [open, setOpen] = useState(false);
 
     function handleLoadList(event, id) {
         if (!event.target.disabled) {
@@ -26,7 +27,15 @@ function ListCard(props) {
             store.setCurrentList(id);
         }
     }
-
+    function handleClose(event){
+        event.stopPropagation();
+        setOpen(false);
+    }
+    function handleConfirm(event){
+        event.stopPropagation();
+        store.deleteMarkedList()
+        setOpen(false);
+    }
     function handleToggleEdit(event) {
         event.stopPropagation();
         toggleEdit();
@@ -43,6 +52,7 @@ function ListCard(props) {
     async function handleDeleteList(event, id) {
         event.stopPropagation();
         store.markListForDeletion(id);
+        setOpen(true);
     }
 
     function handleKeyPress(event) {
@@ -84,6 +94,7 @@ function ListCard(props) {
                         <DeleteIcon style={{fontSize:'48pt'}} />
                     </IconButton>
                 </Box>
+                <DeleteModal open = {open} close = {handleClose} name = {idNamePair.name} confirm = {handleConfirm} />
         </ListItem>
 
     if (editActive) {

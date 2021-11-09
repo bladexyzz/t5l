@@ -108,7 +108,7 @@ loginUser = async(req,res) =>{
                 .status(201)
                 .json({
                     success: false,
-                    errorMessage: "No account with that email is found."
+                    errorMessage: "The username or password you entered is incorrect."
                 })
         }
         const passwordCorrect = await bcrypt
@@ -118,7 +118,7 @@ loginUser = async(req,res) =>{
          .status(201)
          .json({
             success: false,
-          	errorMessage: "Wrong password."
+          	errorMessage: "The username or password you entered is incorrect."
          })
     }
     // LOGIN THE USER

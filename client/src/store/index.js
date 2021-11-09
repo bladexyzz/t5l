@@ -208,7 +208,7 @@ function GlobalStoreContextProvider(props) {
         let payload = {
             name: newListName,
             items: ["?", "?", "?", "?", "?"],
-            ownerEmail: auth.user.email
+            email: auth.user.email
         };
         const response = await api.createTop5List(payload);
         if (response.data.success) {
@@ -233,9 +233,10 @@ function GlobalStoreContextProvider(props) {
         const response = await api.getTop5ListPairs();
         if (response.data.success) {
             let pairsArray = response.data.idNamePairs;
+            let fPA = pairsArray.filter(x => x.email === auth.user.email);
             storeReducer({
                 type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
-                payload: pairsArray
+                payload: fPA
             });
         }
         else {
