@@ -346,7 +346,6 @@ function GlobalStoreContextProvider(props) {
             });
         }
     }
-
     store.undo = function () {
         tps.undoTransaction();
     }
